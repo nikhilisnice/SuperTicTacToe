@@ -14,13 +14,38 @@ document.addEventListener('DOMContentLoaded', function() {
 	canvas.addEventListener("mousedown", userDraw, false);
 	
 	// Switch Button
-	switchButton.onclick = function() {
+	 switchButton.onclick = function() {
 		user1 = !user1;
 		comp = !comp;
-		userDraw();
-		compDraw();
+		for(i = 1; i <= 10; i++)
+			compDraw();
+		};
+	 };
+
+	// Drawing Circles
+	function drawCircle(x, y) {
+		ctx.beginPath();
+		ctx.arc((x * thirdWidth) / 2, (y * thirdHeight) / 2, 60, 0, Math.PI * 2, false);
+		ctx.closePath();
+		ctx.stroke();
 	};
 
+
+	// Drawing X's
+	function drawX(x1, x2, y1, y2) {
+		//Draw X. Line 1.
+		ctx.beginPath();
+		ctx.moveTo((x1 * thirdWidth) + 10, (y1 * thirdHeight) + 10);
+		ctx.lineTo((x2 * thirdWidth) - 10, (y2 * thirdHeight) - 10);
+		ctx.stroke();
+		ctx.closePath();
+		//Draw X. Line 2.
+		ctx.beginPath();
+		ctx.moveTo((x2 * thirdWidth) - 10, (y2 * thirdHeight) + 10);	
+		ctx.lineTo((x1 * thirdWidth) + 10, (y1 * thirdHeight) - 10);
+		ctx.stroke();
+		ctx.closePath();
+	};
 
 	// Creating Tic Tac Toe Lines on Canvas
 
@@ -49,278 +74,73 @@ document.addEventListener('DOMContentLoaded', function() {
 	  y -= canvas.offsetTop;
 	  console.log("x: " + x + "  y: " + y);
 
-	  if ((x < thirdWidth && x > 0) && (y < thirdHeight && y > 0)) {
-	  	if ((user1) && (comp === false)) {
+	  if ((user1) && (comp === false)) {
+		  if ((x < thirdWidth && x > 0) && (y < thirdHeight && y > 0)) {
 	  		//Cell One X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(10, 10);
-				ctx.lineTo(thirdWidth - 10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-				// Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth - 10, 10);
-				ctx.lineTo(10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-			}	else {
-				console.log("ERROR: userDraw cellOne");
-			};
-	  } else if ((x < thirdWidth2 && x > thirdWidth) && (y < thirdHeight && y > 0)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(0, 1, 0, 1);
+			} else if ((x < thirdWidth2 && x > thirdWidth) && (y < thirdHeight && y > 0)) {
 	  		//Cell Two X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth + 10, 10);
-				ctx.lineTo((thirdWidth2) - 10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) - 10, 10);
-				ctx.lineTo(thirdWidth + 10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellTwo");
-			};
-	  } else if ((x < width && x > thirdWidth2) && (y < thirdHeight && y > 0)) {
-	  		if ((user1) && (comp === false)) {
+				drawX(1, 2, 0, 1);
+	  	} else if ((x < width && x > thirdWidth2) && (y < thirdHeight && y > 0)) {
 	  		//Cell Three X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) + 10, 10);
-				ctx.lineTo(width - 10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(width - 10, 10);
-				ctx.lineTo((thirdWidth2) + 10, thirdHeight - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellThree");
-			}
-	  } else if ((x < thirdWidth && x > 0) && (y < thirdHeight2 && y > thirdHeight)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(2, 3, 0, 1);
+		  } else if ((x < thirdWidth && x > 0) && (y < thirdHeight2 && y > thirdHeight)) {
 				//Cell Four X		
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(10, thirdHeight + 10);
-				ctx.lineTo(thirdWidth - 10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-				// Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth - 10, thirdHeight + 10);
-				ctx.lineTo(10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellFour");
-			};
-	  } else if ((x < thirdWidth2 && x > thirdWidth) && (y < thirdHeight2 && y > thirdHeight)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(0, 1, 1, 2);
+		  } else if ((x < thirdWidth2 && x > thirdWidth) && (y < thirdHeight2 && y > thirdHeight)) {
 	  		//Cell Five X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth + 10, thirdHeight + 10);
-				ctx.lineTo((thirdWidth2) - 10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) - 10, thirdHeight + 10);
-				ctx.lineTo(thirdWidth + 10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellFive");
-			};
-	  } else if ((x < width && x > thirdWidth2) && (y < thirdHeight2 && y > thirdHeight)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(1, 2, 1, 2);
+		  } else if ((x < width && x > thirdWidth2) && (y < thirdHeight2 && y > thirdHeight)) {
 				//Cell Six X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) + 10, thirdHeight + 10);
-				ctx.lineTo(width - 10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(width - 10, thirdHeight + 10);
-				ctx.lineTo((thirdWidth2) + 10, (thirdHeight2) - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellSix");
-			};
-	  } else if ((x < thirdWidth && x > 0) && (y < height && y > thirdHeight2)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(2, 3, 1, 2);
+		  } else if ((x < thirdWidth && x > 0) && (y < height && y > thirdHeight2)) {
 				//Cell Seven X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(10, (thirdHeight2) + 10);
-				ctx.lineTo(thirdWidth - 10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-				// Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth - 10, (thirdHeight2) + 10);
-				ctx.lineTo(10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellSeven");
-			};
-	  } else if ((x < thirdWidth2 && x > thirdWidth) && (y < height && y > thirdHeight2)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(0, 1, 2, 3);
+		  } else if ((x < thirdWidth2 && x > thirdWidth) && (y < height && y > thirdHeight2)) {
 				//Cell Eight X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo(thirdWidth + 10, (thirdHeight2) + 10);
-				ctx.lineTo((thirdWidth2) - 10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) - 10, (thirdHeight2) + 10);
-				ctx.lineTo(thirdWidth + 10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellEight");
-			};
-	  } else if ((x < width && x > thirdWidth2) && (y < height && y > thirdHeight2)) {
-	  	if ((user1) && (comp === false)) {
+				drawX(1, 2, 2, 3);
+		  } else if ((x < width && x > thirdWidth2) && (y < height && y > thirdHeight2)) {
 				//Cell Nine X
-				//Draw X. Line 1.
-				ctx.beginPath();
-				ctx.moveTo((thirdWidth2) + 10, (thirdHeight2) + 10);
-				ctx.lineTo(width - 10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-				//Draw X. Line 2.
-				ctx.beginPath();
-				ctx.moveTo(width - 10, (thirdHeight2) + 10);
-				ctx.lineTo((thirdWidth2) + 10, height - 10);
-				ctx.stroke();
-				ctx.closePath();
-			} else {
-				console.log("ERROR: userDraw cellNine");
-			};
+				drawX(2, 3, 2, 3);
 	  } else {
 	  	console.log("ERROR: userDraw()");
 	  };
-	  turnPar.innerHTML = "Their turn!";
+	} else {
+		console.log("ERROR: userDraw()");
 	};
-
 	// Computer randomly drawing O's when someone's turn is finished
 
 	function compDraw() {
 		var number = Math.floor(Math.random() * 90);
 		console.log(number);
-		if (number >= 0 && number < 10) {
-			if ((user1 === false) && (comp)) {
+		if ((user1 === false) && (comp)) {
+			if (number >= 0 && number < 10) {
 				//Cell One O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc(thirdWidth / 2, thirdHeight / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellOne");
-			};
-		} else if (number >= 10 && number < 20) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(1, 1);
+			} else if (number >= 10 && number < 20) {
 				//Cell Two O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((3 * thirdWidth) / 2, thirdHeight / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellTwo");
-			};
-		} else if (number >= 20 && number < 30) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(3, 1);
+			} else if (number >= 20 && number < 30) {
 				//Cell Three O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((5 * thirdWidth) / 2, thirdHeight / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellThree");
-			};
-		} else if (number >= 30 && number < 40) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(5, 1);
+			} else if (number >= 30 && number < 40) {
 				//Cell Four O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc(thirdWidth / 2, height / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellFour");
-			};
-		} else if (number >= 40 && number < 50) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(1, 3);
+			} else if (number >= 40 && number < 50) {
 				//Cell Five O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((3 * thirdWidth) / 2, height / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellFive");
-			};
-		} else if (number >= 50 && number < 60) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(3, 3);
+			} else if (number >= 50 && number < 60) {
 				//Cell Six O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((5 * thirdWidth) / 2, height / 2, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellSix");
-			};
-		} else if (number >= 60 && number < 70) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(5, 3);
+			} else if (number >= 60 && number < 70) {
 				//Cell Seven O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc(thirdWidth / 2, (5 * height) / 6, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellSeven");
-			};
-		} else if (number >= 70 && number < 80) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(1, 5);
+			} else if (number >= 70 && number < 80) {
 				//Cell Eight O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((3 * thirdWidth) / 2, (5 * height) / 6, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellEight");
-			};
-		} else if (number >= 80 && number <= 90) {
-			if ((user1 === false) && (comp)) {
+				drawCircle(3, 5);
+			} else if (number >= 80 && number <= 90) {
 				//Cell Nine O
-				//Draw Circle
-				ctx.beginPath();
-				ctx.arc((5 * thirdWidth) / 2, (5 * height) / 6, 60, 0, Math.PI * 2, false);
-				ctx.closePath();
-				ctx.stroke();
-			} else {
-				console.log("ERROR: compDraw cellNine");
-			};
+				drawCircle(5, 5);
 		} else {
 			console.log("ERROR: compDraw()")
 		};
