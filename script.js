@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	 switchButton.onclick = function() {
 		user1 = !user1;
 		comp = !comp;
-		for(i = 1; i <= 10; i++)
+		for(i = 1; i <= 10; i++) {
 			compDraw();
 		};
 	 };
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		ctx.stroke();
 	};
 
-
 	// Drawing X's
 	function drawX(x1, x2, y1, y2) {
 		//Draw X. Line 1.
@@ -41,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		ctx.closePath();
 		//Draw X. Line 2.
 		ctx.beginPath();
-		ctx.moveTo((x2 * thirdWidth) - 10, (y2 * thirdHeight) + 10);	
-		ctx.lineTo((x1 * thirdWidth) + 10, (y1 * thirdHeight) - 10);
+		ctx.moveTo((x2 * thirdWidth) - 10, (y1 * thirdHeight) + 10);	
+		ctx.lineTo((x1 * thirdWidth) + 10, (y2 * thirdHeight) - 10);
 		ctx.stroke();
 		ctx.closePath();
 	};
@@ -102,11 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		  } else if ((x < width && x > thirdWidth2) && (y < height && y > thirdHeight2)) {
 				//Cell Nine X
 				drawX(2, 3, 2, 3);
-	  } else {
-	  	console.log("ERROR: userDraw()");
-	  };
-	} else {
-		console.log("ERROR: userDraw()");
+	  	} else {
+	  		console.log("ERROR: userDraw()");
+	  	};
+		} else {
+			console.log("ERROR: userDraw()");
+		};
 	};
 	// Computer randomly drawing O's when someone's turn is finished
 
@@ -141,9 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			} else if (number >= 80 && number <= 90) {
 				//Cell Nine O
 				drawCircle(5, 5);
+			} else {
+				console.log("ERROR: compDraw()")
+			};
 		} else {
 			console.log("ERROR: compDraw()")
 		};
-		turnPar.innerHTML = "Your turn!";
 	};
 });
