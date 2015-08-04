@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 	var canvas = document.getElementById("canvas");
 	var turnPar = document.getElementById("turn");
-	var switchButton = document.getElementById("switch");
 	var ctx = canvas.getContext("2d"); 
 	var user1 = true;
 	var comp = false;
@@ -12,15 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	var thirdHeight = height / 3;
 	var thirdHeight2 = thirdHeight * 2;
 	canvas.addEventListener("mousedown", userDraw, false);
-	
-	// Switch Button
-	 switchButton.onclick = function() {
+
+	function switchGame() {
 		user1 = !user1;
 		comp = !comp;
-		for(i = 1; i <= 10; i++) {
-			compDraw();
-		};
-	 };
+	};
+
 
 	// Drawing Circles
 	function drawCircle(x, y) {
@@ -104,6 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	  	} else {
 	  		console.log("ERROR: userDraw()");
 	  	};
+	  	switchGame();
+			compDraw();
 		} else {
 			console.log("ERROR: userDraw()");
 		};
@@ -142,10 +140,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				//Cell Nine O
 				drawCircle(5, 5);
 			} else {
-				console.log("ERROR: compDraw()")
+				console.log("ERROR: compDraw()");
 			};
+			switchGame();
 		} else {
-			console.log("ERROR: compDraw()")
+			console.log("ERROR: compDraw()");
 		};
 	};
 });
